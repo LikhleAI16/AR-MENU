@@ -20,6 +20,26 @@
       height: 100%;
       overflow: hidden;
       font-family: Arial, sans-serif;
+      background: transparent !important;
+    }
+
+    /* Force camera to show properly */
+    .a-canvas {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    video {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      z-index: -1 !important;
     }
 
     canvas {
@@ -27,7 +47,7 @@
       height: 100% !important;
     }
 
-    /* Welcome screen shown first */
+    /* Welcome screen */
     #welcome-screen {
       position: fixed;
       top: 0;
@@ -59,12 +79,11 @@
       color: white;
       font-size: 16px;
       font-weight: normal;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       opacity: 0.8;
     }
 
-    /* Animated instruction box */
-    #welcome-screen .instruction-box {
+    .instruction-box {
       background: rgba(255,255,255,0.1);
       border: 2px solid #FFD700;
       border-radius: 20px;
@@ -73,20 +92,19 @@
       width: 100%;
     }
 
-    #welcome-screen .instruction-box p {
+    .instruction-box p {
       color: white;
       font-size: 15px;
-      line-height: 1.8;
-      margin: 6px 0;
+      line-height: 1.9;
+      margin: 4px 0;
     }
 
-    #welcome-screen .instruction-box .step {
+    .instruction-box .step {
       color: #FFD700;
       font-weight: bold;
       font-size: 16px;
     }
 
-    /* Pulse animation on scan button */
     #start-btn {
       background: #FFD700;
       color: #1a1a2e;
@@ -105,13 +123,13 @@
       100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,215,0,0); }
     }
 
-    #welcome-screen .footer-text {
+    .footer-text {
       color: rgba(255,255,255,0.5);
       font-size: 12px;
       margin-top: 20px;
     }
 
-    /* Scanning instruction shown after camera opens */
+    /* Scan instruction top bar */
     #scan-instruction {
       position: fixed;
       top: 0;
@@ -119,7 +137,7 @@
       width: 100%;
       background: linear-gradient(135deg, #1a1a2e, #0f3460);
       color: white;
-      padding: 20px 15px;
+      padding: 15px;
       text-align: center;
       z-index: 9999;
       display: none;
@@ -127,17 +145,16 @@
 
     #scan-instruction h3 {
       color: #FFD700;
-      font-size: 17px;
-      margin-bottom: 6px;
+      font-size: 16px;
+      margin-bottom: 4px;
     }
 
     #scan-instruction p {
-      font-size: 13px;
-      opacity: 0.9;
-      line-height: 1.5;
+      font-size: 12px;
+      opacity: 0.85;
     }
 
-    /* Scanning animation border */
+    /* Animated scanning frame */
     #scan-frame {
       position: fixed;
       top: 50%;
@@ -145,34 +162,60 @@
       transform: translate(-50%, -50%);
       width: 200px;
       height: 200px;
-      border: 3px solid #FFD700;
-      border-radius: 20px;
       z-index: 9998;
       display: none;
     }
 
-    #scan-frame::before {
-      content: '';
+    #scan-frame .corner {
       position: absolute;
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border: 3px solid transparent;
-      border-top-color: #FFD700;
-      border-radius: 20px;
-      animation: spin 1.5s linear infinite;
+      width: 40px;
+      height: 40px;
+      border-color: #FFD700;
+      border-style: solid;
     }
 
-    @keyframes spin {
-      0%   { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    #scan-frame .corner.tl {
+      top: 0; left: 0;
+      border-width: 4px 0 0 4px;
+      border-radius: 8px 0 0 0;
+    }
+
+    #scan-frame .corner.tr {
+      top: 0; right: 0;
+      border-width: 4px 4px 0 0;
+      border-radius: 0 8px 0 0;
+    }
+
+    #scan-frame .corner.bl {
+      bottom: 0; left: 0;
+      border-width: 0 0 4px 4px;
+      border-radius: 0 0 0 8px;
+    }
+
+    #scan-frame .corner.br {
+      bottom: 0; right: 0;
+      border-width: 0 4px 4px 0;
+      border-radius: 0 0 8px 0;
+    }
+
+    #scan-frame .scan-line {
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #FFD700, transparent);
+      animation: scanline 2s linear infinite;
+      top: 0;
+    }
+
+    @keyframes scanline {
+      0%   { top: 0%; }
+      100% { top: 100%; }
     }
 
     /* Dish info card */
     #dish-card {
       position: fixed;
-      bottom: 20px;
+      bottom: 60px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(0,0,0,0.90);
@@ -187,7 +230,7 @@
     }
 
     #dish-card h2 {
-      margin: 0 0 10px 0;
+      margin: 0 0 8px 0;
       font-size: 20px;
       color: #FFD700;
     }
@@ -215,7 +258,7 @@
       cursor: pointer;
     }
 
-    /* Restaurant name bottom bar */
+    /* Bottom restaurant bar */
     #restaurant-bar {
       position: fixed;
       bottom: 0;
@@ -223,7 +266,7 @@
       width: 100%;
       background: rgba(255,140,0,0.95);
       color: white;
-      padding: 8px;
+      padding: 10px;
       text-align: center;
       font-size: 14px;
       font-weight: bold;
@@ -235,10 +278,10 @@
 
 <body>
 
-  <!-- WELCOME SCREEN (shown when customer scans main QR) -->
+  <!-- WELCOME SCREEN -->
   <div id="welcome-screen">
     <div class="logo">🍽️</div>
-    <h1 id="welcome-restaurant-name">Sharma Dhaba</h1>
+    <h1 id="welcome-name">Sharma Dhaba</h1>
     <h2>Welcome to our AR Menu!</h2>
 
     <div class="instruction-box">
@@ -246,8 +289,10 @@
       <p>📱 Tap the button below</p>
       <p>📷 Camera will open</p>
       <p>🔍 Point camera at the</p>
-      <p><strong style="color:#FFD700;">QR code next to any dish</strong></p>
-      <p>✨ See the dish in AR!</p>
+      <p><strong style="color:#FFD700;">
+        QR code next to any dish
+      </strong></p>
+      <p>✨ Watch the dish appear in AR!</p>
     </div>
 
     <button id="start-btn" onclick="startAR()">
@@ -259,14 +304,20 @@
     </p>
   </div>
 
-  <!-- SCAN INSTRUCTION (shown after camera opens) -->
+  <!-- SCAN INSTRUCTION -->
   <div id="scan-instruction">
     <h3>📷 Point camera at a dish QR code</h3>
-    <p>Hold steady for 2-3 seconds • Good lighting helps</p>
+    <p>Hold steady • Good lighting helps</p>
   </div>
 
-  <!-- Scanning frame animation -->
-  <div id="scan-frame"></div>
+  <!-- SCANNING FRAME -->
+  <div id="scan-frame">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <div class="scan-line"></div>
+  </div>
 
   <!-- DISH INFO CARD -->
   <div id="dish-card">
@@ -277,20 +328,21 @@
     <p id="dish-description"></p>
   </div>
 
-  <!-- Restaurant bottom bar -->
+  <!-- BOTTOM BAR -->
   <div id="restaurant-bar"></div>
 
   <!-- AR SCENE -->
   <a-scene
     embedded
     vr-mode-ui="enabled: false"
-    renderer="logarithmicDepthBuffer: true; alpha: true"
+    renderer="logarithmicDepthBuffer: true; alpha: true; antialias: true"
     arjs="sourceType: webcam;
+          videoTexture: true;
           debugUIEnabled: false;
           detectionMode: mono_and_matrix;
           matrixCodeType: 3x3;">
 
-    <!-- DISH 1 — Barcode value 1 -->
+    <!-- DISH 1 — value 1 -->
     <a-marker type="barcode" value="1" id="marker-1">
       <a-image
         src="photos/biryani.jpg"
@@ -309,7 +361,7 @@
       </a-text>
     </a-marker>
 
-    <!-- DISH 2 — Barcode value 2 -->
+    <!-- DISH 2 — value 2 -->
     <a-marker type="barcode" value="2" id="marker-2">
       <a-image
         src="photos/paneer.jpg"
@@ -328,7 +380,7 @@
       </a-text>
     </a-marker>
 
-    <!-- DISH 3 — Barcode value 3 -->
+    <!-- DISH 3 — value 3 -->
     <a-marker type="barcode" value="3" id="marker-3">
       <a-image
         src="photos/dal.jpg"
@@ -351,20 +403,16 @@
   </a-scene>
 
   <script>
-    // Load menu data on page load
     fetch('menu.json')
       .then(function(res) { return res.json(); })
       .then(function(menuData) {
 
-        // Set restaurant name on welcome screen
-        document.getElementById('welcome-restaurant-name')
+        document.getElementById('welcome-name')
           .textContent = menuData.restaurant;
 
-        // Set restaurant name on bottom bar
         document.getElementById('restaurant-bar')
           .textContent = '🍽️ ' + menuData.restaurant;
 
-        // Connect each marker to dish data
         menuData.dishes.forEach(function(dish) {
           var marker = document.getElementById('marker-' + dish.id);
           if (marker) {
@@ -378,35 +426,42 @@
         });
       })
       .catch(function(err) {
-        console.log('Menu error:', err);
+        console.log('Error:', err);
       });
 
-    // Start AR camera — hide welcome screen
     function startAR() {
-      document.getElementById('welcome-screen').style.display = 'none';
-      document.getElementById('scan-instruction').style.display = 'block';
-      document.getElementById('scan-frame').style.display = 'block';
-      document.getElementById('restaurant-bar').style.display = 'block';
+      document.getElementById('welcome-screen')
+        .style.display = 'none';
+      document.getElementById('scan-instruction')
+        .style.display = 'block';
+      document.getElementById('scan-frame')
+        .style.display = 'block';
+      document.getElementById('restaurant-bar')
+        .style.display = 'block';
     }
 
-    // Show dish info card
     function showDishCard(dish) {
-      document.getElementById('dish-card').style.display = 'block';
-      document.getElementById('scan-frame').style.display = 'none';
-      document.getElementById('dish-name').textContent = dish.name;
-      document.getElementById('dish-price').textContent = '💰 ' + dish.price;
-      document.getElementById('dish-ingredients').textContent =
-        '🥘 ' + dish.ingredients;
-      document.getElementById('dish-description').textContent =
-        '📝 ' + dish.description;
+      document.getElementById('dish-card')
+        .style.display = 'block';
+      document.getElementById('scan-frame')
+        .style.display = 'none';
+      document.getElementById('dish-name')
+        .textContent = dish.name;
+      document.getElementById('dish-price')
+        .textContent = '💰 ' + dish.price;
+      document.getElementById('dish-ingredients')
+        .textContent = '🥘 ' + dish.ingredients;
+      document.getElementById('dish-description')
+        .textContent = '📝 ' + dish.description;
     }
 
-    // Hide dish info card
     function hideDishCard() {
-      document.getElementById('dish-card').style.display = 'none';
-      document.getElementById('scan-frame').style.display = 'block';
+      document.getElementById('dish-card')
+        .style.display = 'none';
+      document.getElementById('scan-frame')
+        .style.display = 'block';
     }
   </script>
 
 </body>
-  </html>
+    </html>

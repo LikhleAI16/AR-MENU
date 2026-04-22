@@ -1,0 +1,31 @@
+{
+  "restaurant": "Sharma Dhaba",
+  "address": "Main Road, Your Town",
+  "phone": "9876543210",
+  "dishes": [
+    {
+      "id": 1,
+      "name": "Chicken Biryani",
+      "price": "Rs. 120",
+      "ingredients": "Rice, Chicken, Spices, Onion, Curd",
+      "description": "Slow cooked aromatic biryani",
+      "photo": "photos/biryani.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Paneer Butter Masala",
+      "price": "Rs. 150",
+      "ingredients": "Paneer, Butter, Tomato, Cream, Spices",
+      "description": "Rich creamy paneer curry",
+      "photo": "photos/paneer.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Dal Makhani",
+      "price": "Rs. 90",
+      "ingredients": "Black Dal, Butter, Cream, Tomato",
+      "description": "Slow cooked creamy dal",
+      "photo": "photos/dal.jpg"
+    }
+  ]
+}
